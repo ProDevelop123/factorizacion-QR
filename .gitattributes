@@ -1,0 +1,11 @@
+# Normalizacion de finales de linea.
+#
+# El proyecto se desarrolla en Windows y se compila en los servidores de
+# Vercel, que corren Linux. Almacenar siempre LF evita diferencias espurias en
+# los diffs y fallos en herramientas que no toleran CRLF.
+* text=auto eol=lf
+
+*.png   binary
+*.jpg   binary
+*.svg   text eol=lf
+*.woff2 binary
