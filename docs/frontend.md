@@ -600,16 +600,32 @@ Proyecto de referencia     Este proyecto
 
 ### Requisitos
 
-- Node 20 o superior
-- El backend levantado (`docker compose up -d --build` desde la raíz)
+- **Node 20 o superior** y `pnpm`. Si no lo tienes: `corepack enable`.
+- **El backend en marcha.** Vive en un repositorio aparte, y arrancarlo es un
+  solo comando; genera sus propias claves y no necesita nada mas que Docker:
+
+```bash
+git clone https://github.com/ProDevelop123/reto-2026.git
+cd reto-2026
+docker compose up -d --build
+```
 
 ### Arranque
 
+Desde la raiz de **este** repositorio:
+
 ```bash
-cd web
 pnpm install
-cp .env.example .env
 pnpm dev
+```
+
+**No hace falta crear ningun `.env`.** El valor por defecto ya apunta a
+`http://localhost:8080`, que es donde escucha el backend. El fichero
+`.env.example` esta solo para cuando quieras apuntar a otra URL, por ejemplo
+un despliegue en la nube:
+
+```bash
+cp .env.example .env      # opcional
 ```
 
 → **http://localhost:5173** · usuario `admin` · contraseña `Reto2026.Demo`
@@ -650,7 +666,7 @@ visible es mejor que uno silencioso.
 
 | Síntoma | Causa probable | Solución |
 |---|---|---|
-| "No se pudo contactar con la API" | El backend no está levantado | `docker compose up -d` desde la raíz |
+| "No se pudo contactar con la API" | El backend no está levantado | `docker compose up -d` en el repositorio [reto-2026](https://github.com/ProDevelop123/reto-2026) |
 | Error de CORS en consola | Vite arrancó en otro puerto, o `CORS_ORIGINS` no lo incluye | Verificar que sea el 5173 y revisar la variable |
 | El login funciona pero la sesión cae a los 15 min | La cookie de refresco no está viajando | Comprobar `withCredentials: true` y que `CORS_ORIGINS` no sea `*` |
 | 401 con `missing_csrf_header` | La cabecera `X-Refresh-Request` no se está enviando | Comprobar la configuración base de axios |

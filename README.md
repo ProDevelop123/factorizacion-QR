@@ -15,15 +15,20 @@ Q, R, las estadísticas y una **verificación matemática independiente**.
 
 ```bash
 pnpm install
-cp .env.example .env      # VITE_API_URL=http://localhost:8080
 pnpm dev
 ```
 
 → **http://localhost:5173** · usuario `admin` · contraseña `Reto2026.Demo`
 
-Requiere el backend levantado. Desde la raíz del repositorio:
+**No hace falta crear ningun `.env`**: el valor por defecto ya apunta a
+`http://localhost:8080`, que es donde escucha el backend.
+
+Requiere el backend en marcha. Vive en **otro repositorio**, y arrancarlo es un
+solo comando —genera sus propias claves y no necesita mas que Docker:
 
 ```bash
+git clone https://github.com/ProDevelop123/reto-2026.git
+cd reto-2026
 docker compose up -d --build
 ```
 
