@@ -14,9 +14,9 @@ Q, R, las estadísticas y una **verificación matemática independiente**.
 ## Arranque
 
 ```bash
-npm install
+pnpm install
 cp .env.example .env      # VITE_API_URL=http://localhost:8080
-npm run dev
+pnpm dev
 ```
 
 → **http://localhost:5173** · usuario `admin` · contraseña `Reto2026.Demo`
@@ -31,13 +31,38 @@ El puerto **5173 es fijo** (`strictPort`): es el origen que la API declara en
 `CORS_ORIGINS`. Si Vite eligiera otro al estar ocupado, el navegador bloquearía
 las peticiones y el fallo sería difícil de diagnosticar.
 
+## Gestor de paquetes
+
+El proyecto usa **pnpm**, con la versión fijada en `package.json`:
+
+```json
+"packageManager": "pnpm@10.6.2"
+```
+
+Fijarla no es cosmético. Vercel lee ese campo y usa corepack para instalar esa
+versión concreta en lugar de la que traiga por defecto su imagen de
+construcción. Es lo que evita el fallo `ERR_INVALID_THIS`
+—*"Value of `this` must be of type URLSearchParams"*— que producen las
+versiones 8.x y 9.0–9.1 de pnpm sobre Node 20 o superior: usan un polyfill de
+`fetch` incompatible con el `undici` de Node moderno y fallan al consultar el
+registro.
+
+Además garantiza que la construcción local y la de Vercel usen **exactamente el
+mismo gestor**, que es lo que hace reproducible el resultado.
+
+Si no tienes pnpm:
+
+```bash
+corepack enable          # viene con Node 16.9+
+```
+
 ## Comandos
 
 ```bash
-npm run dev       # desarrollo con recarga en caliente
-npm run build     # compilación de producción
-npm run preview   # sirve la compilación
-npm run lint      # análisis estático
+pnpm dev       # desarrollo con recarga en caliente
+pnpm build     # compilación de producción
+pnpm preview   # sirve la compilación
+pnpm lint      # análisis estático
 ```
 
 ## Las tres ideas

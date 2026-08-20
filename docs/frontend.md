@@ -607,9 +607,9 @@ Proyecto de referencia     Este proyecto
 
 ```bash
 cd web
-npm install
+pnpm install
 cp .env.example .env
-npm run dev
+pnpm dev
 ```
 
 → **http://localhost:5173** · usuario `admin` · contraseña `Reto2026.Demo`
@@ -618,10 +618,10 @@ npm run dev
 
 | Comando | Qué hace |
 |---|---|
-| `npm run dev` | Servidor de desarrollo con recarga en caliente |
-| `npm run build` | Compilación de producción a `dist/` |
-| `npm run preview` | Sirve la compilación de producción |
-| `npm run lint` | Análisis estático |
+| `pnpm dev` | Servidor de desarrollo con recarga en caliente |
+| `pnpm build` | Compilación de producción a `dist/` |
+| `pnpm preview` | Sirve la compilación de producción |
+| `pnpm lint` | Análisis estático |
 
 ### Variables de entorno
 
